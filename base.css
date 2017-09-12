@@ -1,0 +1,415 @@
+/* 通用 */
+
+
+/*定位*/
+.posr{
+  position: relative;
+}
+.posa{
+  position: absolute;
+}
+.posf{
+  position: fixed;
+}
+
+/*外边距 正*/
+.m10{
+  margin: 10px;
+}
+.m15{
+  margin: 15px;
+}
+.m20{
+  margin: 20px;
+}
+.m25{
+  margin: 25px;
+}
+.m30{
+  margin: 30px;
+}
+.m40{
+  margin: 40px;
+}
+/* left */
+.ml10{
+  margin-left: 10px;
+}
+.ml15{
+  margin-left: 15px;
+}
+.ml20{
+  margin-left: 20px;
+}
+.ml25{
+  margin-left: 25px;
+}
+.ml30{
+  margin-left: 30px;
+}
+.ml40{
+  margin-left: 40px;
+}
+
+/*top*/
+.mt10{
+  margin-top: 10px;
+}
+.mt15{
+  margin-top: 15px;
+}
+.mt20{
+  margin-top: 20px;
+}
+.mt25{
+  margin-top: 25px;
+}
+.mt30{
+  margin-top: 30px;
+}
+.mt40{
+  margin-top: 40px;
+}
+
+/*right*/
+.mr10{
+  margin-right: 10px;
+}
+.mr15{
+  margin-right: 15px;
+}
+.mr20{
+  margin-right: 20px;
+}
+.mr25{
+  margin-right: 25px;
+}
+.mr30{
+  margin-right: 30px;
+}
+.mr40{
+  margin-right: 40px;
+}
+
+/*bottom*/
+.mb10{
+  margin-bottom: 10px;
+}
+.mb15{
+  margin-bottom: 15px;
+}
+.mb20{
+  margin-bottom: 20px;
+}
+.mb25{
+  margin-bottom: 25px;
+}
+.mb30{
+  margin-bottom: 30px;
+}
+.mb40{
+  margin-bottom: 40px;
+}
+
+
+/*外边距 付*/
+.m-10{
+  margin: -10px;
+}
+.m-15{
+  margin: -15px;
+}
+.m-20{
+  margin: -20px;
+}
+.m-25{
+  margin: -25px;
+}
+.m-30{
+  margin: -30px;
+}
+.m-40{
+  margin: -40px;
+}
+/* left */
+.ml-10{
+  margin-left: -10px;
+}
+.ml-15{
+  margin-left: -15px;
+}
+.ml-20{
+  margin-left: -20px;
+}
+.ml-25{
+  margin-left: -25px;
+}
+.ml-30{
+  margin-left: -30px;
+}
+.ml-40{
+  margin-left: -40px;
+}
+
+/*top*/
+.mt-10{
+  margin-top: -10px;
+}
+.mt-15{
+  margin-top: -15px;
+}
+.mt-20{
+  margin-top: -20px;
+}
+.mt-25{
+  margin-top: -25px;
+}
+.mt-30{
+  margin-top: -30px;
+}
+.mt40{
+  margin-top: 40px;
+}
+
+/*right*/
+.mr-10{
+  margin-right: -10px;
+}
+.mr-15{
+  margin-right: -15px;
+}
+.mr-20{
+  margin-right: -20px;
+}
+.mr-25{
+  margin-right: -25px;
+}
+.mr-30{
+  margin-right: -30px;
+}
+.mr-40{
+  margin-right: -40px;
+}
+
+/*bottom*/
+.mb-10{
+  margin-bottom: -10px;
+}
+.mb-15{
+  margin-bottom: -15px;
+}
+.mb-20{
+  margin-bottom: -20px;
+}
+.mb-25{
+  margin-bottom: -25px;
+}
+.mb-30{
+  margin-bottom: -30px;
+}
+.mb-40{
+  margin-bottom: -40px;
+}
+
+/* 内边距 */
+.p10{
+  padding: 10px;
+}
+.p15{
+  padding: 15px;
+}
+.p20{
+  padding: 20px;
+}
+.p25{
+  padding: 25px;
+}
+.p30{
+  padding: 30px;
+}
+.p40{
+  padding: 40px;
+}
+/* left */
+.pl10{
+  padding-left: 10px;
+}
+.pl15{
+  padding-left: 15px;
+}
+.pl20{
+  padding-left: 20px;
+}
+.pl25{
+  padding-left: 25px;
+}
+.pl30{
+  padding-left: 30px;
+}
+.pl40{
+  padding-left: 40px;
+}
+
+/* top */
+.pt10{
+  padding-top: 10px;
+}
+.pt15{
+  padding-top: 15px;
+}
+.pt20{
+  padding-top: 20px;
+}
+.pt25{
+  padding-top: 25px;
+}
+.pt30{
+  padding-top: 30px;
+}
+.pt40{
+  padding-top: 40px;
+}
+
+/*right*/
+.pr10{
+  padding-right: 10px;
+}
+.pr15{
+  padding-right: 15px;
+}
+.pr20{
+  padding-right: 20px;
+}
+.pr25{
+  padding-right: 25px;
+}
+.pr30{
+  padding-right: 30px;
+}
+.pr40{
+  padding-right: 40px;
+}
+
+/*bottom*/
+.pb10{
+  padding-bottom: 10px;
+}
+.pb15{
+  padding-bottom: 15px;
+}
+.pb20{
+  padding-bottom: 20px;
+}
+.pb25{
+  padding-bottom: 25px;
+}
+.pb30{
+  padding-bottom: 30px;
+}
+.pb40{
+  padding-bottom: 40px;
+}
+
+/*text-color*/
+.text-dark{
+  color: #333;
+}
+.text-light-dark{
+  color: #666;
+}
+.text-gray{
+  color: #999;
+}
+.text-red{
+  color: #dc3333;
+}
+.text-yellow{
+  color: #bc8e51;
+}
+.text-white{
+  color: #fff;
+}
+.text-blue{
+  color: #428bca;
+}
+.text-black{
+  color: #000;
+}
+
+/*文字大小*/
+.fz12{
+  font-size: 12px; 
+}
+.fz13{
+  font-size: 13px;
+}
+.fz14{
+  font-size: 14px;
+}
+.fz15{
+  font-size: 15px;
+}
+.fz16{
+  font-size: 16px;
+}
+.fz18{
+  font-size: 18px;
+}
+.fz20{
+  font-size: 20px;
+}
+.fz22{
+  font-size: 22px;
+}
+.fz24{
+  font-size: 24px;
+}
+
+/*单行文本溢出*/
+.over-ell{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+/*纵向index*/
+.z10{
+  z-index: 10;
+}
+.z20{
+  z-index: 20;
+}
+.z30{
+  z-index: 30;
+}
+.z40{
+  z-index: 40;
+}
+.z50{
+  z-index: 50;
+}
+.z999{
+  z-index: 999;
+}
+
+/*内容溢出*/
+.ohidden{
+  overflow: hidden;
+}
+.oscrollx{
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.oscrolly{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/*光标样式*/
+.cpointer{
+  cursor: pointer;
+}
+.cdefault{
+  cursor: default;
+}
+
