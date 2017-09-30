@@ -13,6 +13,9 @@
 }
 
 /*外边距 正*/
+.m5{
+  margin: 5px;
+}
 .m10{
   margin: 10px;
 }
@@ -212,6 +215,9 @@
 }
 
 /* 内边距 */
+.p5{
+  padding: 5px;
+}
 .p10{
   padding: 10px;
 }
@@ -411,5 +417,11 @@
 }
 .cdefault{
   cursor: default;
+}
+
+/*文本强制换行*/
+.word-break{
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
