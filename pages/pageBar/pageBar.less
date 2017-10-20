@@ -1,0 +1,77 @@
+/*
+ * @author mona
+ * @date 2017-10-19
+ * */
+
+@gray: #ccc;
+@red: #c93c44;
+@white: #fff;
+@dark: #333; 
+
+.page-bar{
+    text-align: center;
+    &>ul{
+        display: inline-block;
+        &:before,
+        &:after{
+          display: block;
+          content: ' ';
+          height: 0;
+          width: 0;
+          clear: both;
+        }
+        &>li{
+            list-style: none;
+          float: left;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          &[data-type="oneof"]>span{
+              cursor: default;
+          }
+          &>span{
+            display: inline-block;
+              min-width: 30px;
+              padding-left: 5px;
+              padding-right: 5px;
+              height: 30px;
+              text-align: center;
+              line-height: 30px;
+              background-color: #fff;
+              border: 1px solid @gray;
+              cursor: pointer;
+              &.cur{
+                  border-color: @red;
+                  color: @red;
+              }
+          }
+        }
+    }
+    
+    .search-page > span{
+      background-color: @red;
+      color: @white;
+      font-size: 12px;
+      letter-spacing: 1px;
+      border-color: @red;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    .search-ct input{
+      display: inline-block;
+      height: 30px;
+      min-width: 50px;
+      max-width: 60px;
+      background-color: @white;
+      color: @dark;
+      border: 1px solid @gray;
+      text-align: center;
+    }
+    
+    .search-ct input:focus{
+      outline: none;
+    }
+    
+}
+
