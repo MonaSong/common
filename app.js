@@ -1,25 +1,24 @@
 /**
  * @author  mona
  * @date  2017-10-20
- * @description 网络层封装
+ * @description 工具方法封装
  */
 
 (function ($, owner){
 
   // 初始化app
-  owner.initApp = function () {
-
+  var initApp = function () {
+    var server = 'http://10.0.2.45:8080'
+    localStorage["$server"] = server
+    localStorage["$api"] = server + '/cicc-app/api'
   }
 
-  // 获取服务器地址
-  owner.getServer = function () {
-
-  }
+  initApp()
 
   /**
   * @description  基础请求
-  * @param {options} [Object] [基础请求参数] 
-  * options.param[Object],
+  * @param {Object} [options] [基础请求参数] 
+  * options.param,
   * options.param.url,     // 请求地址
   * options.param.data,    // 请求参数
   * options.param.httpType // 请求类型
@@ -57,22 +56,23 @@
 
   /**
   * @description  get
-  * @param {url} [String] [请求地址] 
-  * @param {param} [Object] [请求参数] 
-  * @param {callback} [Function] [请求回调]
+  * @param {Object} [param] 
+  * param.url   // 请求地址
+  * param.data  // 请求参数
+  * param.cb    // 请求回调 
   */
-  var getData = function (param) {
+  owner.getData = function (param) {
     baseRequest({param: {url: param.url, data: param.data, httpType: 'get'}, cb: param.cb})
   }
 
   /**
   * @description  post
-  * @param {url} [String] [请求地址] 
-  * @param {param} [Object] [请求参数] 
-  * @param {callback} [Function] [请求回调]
+  * @param {Object} [param]
+  * param.url   // 请求地址
+  * param.data  // 请求参数
+  * param.cb    // 请求回调 
   */
-  var postData = function (param) {
-    baseRequest({ param: {url: param.url, data: param.data, httpType: 'post'}, cb: param.cb})
+  owner.postData = function (param) {
+    baseRequest({param: {url: param.url, data: param.data, httpType: 'post'}, cb: param.cb})
   }
-
 }(mui, window.app = {}))

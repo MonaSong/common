@@ -36,6 +36,9 @@
   background-color: #fff;
   border: 1px solid #ccc;
   cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
 }
 .page-bar > ul > li > span.cur {
   border-color: #c93c44;
