@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>中金公司-分析师简介</title>
+
+    <!-- Bootstrap -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+     
+    <![endif]-->
+
+    <!-- 通用样式，每个页面都需要 -->
+    <link href="../css/common.css" rel="stylesheet">
+
+    <!-- 当前页面样式 -->
+    <link href="../css/analyst.css" rel="stylesheet">
+
+    <!-- 滚动条 -->
+    <link rel="stylesheet" href="../lib/jquery-scrollbar/css/jquery.mCustomScrollbar.min.css">
+
+    <!-- 环信 -->
+    <!-- 配置 -->
+    <script src="../lib/im/web-im/demo/javascript/dist/webim.config.js"></script>
+
+    <!-- A JavaScript library for XMPP over Websocket -->
+    <script src="../lib/im/web-im/sdk/dist/strophe-1.2.8.min.js"></script>
+    
+    <!-- sdk -->
+    <script src="../lib/im/web-im/sdk/dist/websdk-1.4.12.js"></script>
+
+    <script src="../js/cicc_uploadShim.js"></script>
+
+    <!-- webrtc -->
+    <script>
+      if (WebIM.config.isWebRTC) {
+          document.write("<script src='../lib/im/web-im/webrtc/dist/adapter.js'><\/script>");
+          document.write("<script src='../lib/im/web-im/webrtc/dist/webrtc-1.4.12.js'><\/script>");
+      }
+    </script>
+
+    <!--视频播放插件-->
+    <link rel="stylesheet" href="../lib/vedio/css/video-js.css">
+    <script src="../lib/vedio/js/video.min.js"></script>
+
+    <script src="../lib/im/web-im/sdk/dist/websdk.shim.js"></script>
+    <style>
+      [data-dismiss] {
+        font-size: 30px;
+        color: #999;
+        cursor: pointer;
+        position: absolute;
+        top: -10px;
+        right: 20px;
+      }
+      .hg-tips .hg-content {
+        height: 517px;
+      }
+      .modal-content{
+        -webkit-border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        border-radius: 0 !important;
+      }
+      .icon-underline{
+        top: -10px;
+      }
+      .im-history{
+        height: 365px;
+        margin-top: -15px;
+        overflow-y: scroll;
+      }
+      .im-history > div{
+        position: relative;
+      }
+      [data-role="error-tip"]{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        margin-left: -50px;
+        background-color: #333;
+        color: #fff;
+        width: 150px;
+        padding: 5px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .im-history > div{
+        height: auto;
+        overflow-y: auto;
+        padding-bottom: 30px;
+      }
+
+      /*放大显示内容*/
+      .im-enlarge-content{
+        text-align: center;
+        position: fixed;
+        z-index: 10000;
+        text-align: center;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+      .im-enlarge-content .bg-drop{
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        z-index: 10000;
+        opacity: .5;
+      }
+      .im-enlarge-content .im-large-ct {
+        display: inline-block;
+        top: 50%;
+        z-index: 10001;
+        text-align: center;
+        position: relative;
+      }
+      .im-enlarge-content .im-large-ct img{
+        width: auto;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .video-js {
+        display: inline-block;
+        width: 600px;
+        height: 500px;
+      }
+
+      /*新消息，小红点*/
+      .new-msg{
+        display: none;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        border-radius: 100%;
+        background-color: #fb3b3b;
+        top: 3px;
+        left: 57px;
+      }
+
+      #contact-item > ul > li{
+        position: relative;
+      }
+
+      #contact-item > ul > li .media{
+        margin-top: 0;
+      }
+    </style>
+    <script>
+      // 隐藏放大的内容
+      function hideLargeCt(target) {
+          $(target).parents('.im-enlarge-content').hide()
+          $('#im-ct').html('')
+      }
+    </script>
+  </head>
+  <body>
+
+    <div class="im-enlarge-content" style="display: none;" >
+      <div class="bg-drop" onclick="hideLargeCt(this)"></div>
+      <div class="im-large-ct" id="im-ct">
+        <!--插入内容-->
+      </div>
+    </div>
+
+    <div class="c-head sm-head">
+      <div class="language-top">
+        <div class="lan-box">
+          <div class="pull-right">
+            <span>中文</span>
+            <i>|</i>
+            <span>English</span>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="head-top clearfix">
+          <!-- logo -->
+          <div class="logo">
+            <img src="../img/logo.png" alt="">
+          </div>
+
+          <div class="sm-title pull-left">
+            <i class="icon-vertical-line"></i>
+            分析师简介
+          </div>
+
+
+          <!-- 消息和用户信息 -->
+          <div class="info pull-right">
+              <div class="info-all">
+                  <a href="javascript:void(0)" class="info-bell pull-left">
+                    <i class="img icon-bell"></i>
+                    <span class="info-num img icon-message" id="top-msg-num">99+</span>
+                  </a>
+                  <div class="info-user pull-right" data-role="list-box">
+                    <div data-role="list-ctr">
+                      <div class="user-img">
+                        <img src="../img/logo.png" alt="">
+                      </div>
+                      <div class="user-name">
+                        <span>
+                          刘希
+                          <i class="icon-arron-bottom"></i>
+                        </span>
+                        <div class="slide-content" data-role="list">
+                          <div class="info-item">
+                              <ul>
+                                <li><a href="">账户信息</a></li>
+                                <li><a href="">偏好设置</a></li>
+                                <li><a href="">我的足迹</a></li>
+                                <li><a href="">我的留言</a></li>
+                                <li><a href="">登出账号</a></li>
+                              </ul>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <i class="icon-h"></i>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="banner-300">
+        <img src="../img/default.jpg" alt="">
+      </div>
+    </div>
+    <!-- content -->
+    <div class="c-content sm-content clearfix" style="margin-top: -200px">
+      <div class="container">
+        <div class="row h-285 mt-f-210 pad-bt-360">
+          <div class="col-xs-3 analyst-left">
+            <div class="analyst-img">
+              <img src="../img/default.jpg" alt="">
+            </div>
+            <div class="analyst-bage-list">
+              <div class="row">
+                <div class="col-xs-4"> 
+                  <span class="label label-danger">
+                    <i>+</i>关注
+                  </span>
+                </div>
+                <div class="col-xs-4  text-left">
+                  <span class="label label-warning" data-toggle="modal" data-target="#m1">
+                    留言
+                  </span>
+                </div>
+                <div class="col-xs-4 text-left">
+                  <span class="label label-warning" id="contact">
+                    咨询
+                  </span>
+                </div>
+              </div>             
+            </div>
+          </div>
+          <div class="col-xs-9 analyst-info">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-right">
+                  <div class="row">
+                    <div class="col-xs-4 p-rgt"> 
+                      <i></i>
+                      <h4>2716</h4>
+                      <p>关注人数</p>
+                    </div>
+                    <div class="col-xs-4 p-rgt">
+                      <i></i>
+                      <h4>2716</h4>
+                      <p>文章总数</p>
+                    </div>
+                    <div class="col-xs-4 p-rgt">
+                      <h4>2716</h4>
+                      <p>总浏览量</p>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="panel-title">梁建</h3>
+              </div>
+              <div class="panel-body">
+                <p>分析师简介</p>
+                <p>分析师简介</p>
+                <p>分析师简介分析师简介分析师简介分析师简介分析师简介分析师简介分析师简介</p>
+                <p>分析师简介</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <!--左侧-->
+          <div class="col-xs-9 pl0">
+           <div class="mt20">
+              <ul id="myTab" class="nav nav-tabs cus-tab">
+                <li class="active">
+                  <a href="#yb" data-toggle="tab" aria-expanded="false">
+                    发布的研报
+                    <i class="icon-underline"></i>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="#fxs" data-toggle="tab" aria-expanded="true">
+                    覆盖的股票
+                    <i class="icon-underline"></i>
+                  </a>
+                </li>
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="yb">
+                  <div class="contact-list my-star">
+                    <div class="contact-list-info clearfix">
+                      <div class="my-star">
+                        <div class="info-title">
+                          <h4>
+                            迈出化解地方政府债务风险的第一步
+                            <i class="img icon-speaker"></i>
+                          </h4>
+                        </div>
+                        <div class="info-ctr clearfix">
+                          <div class="pull-left">
+                            <span>
+                              <i class="img icon-clock"></i>
+                              <b>2017.03.28</b>
+                            </span>
+                            <span>
+                              <i class="img icon-page"></i>
+                              <b>10页</b>
+                            </span>
+                            <span>
+                                <i class="img icon-article"></i>
+                                <b>媒体文章</b>
+                                <b>毛军华</b>
+                            </span>
+                          </div>
+                          <div class="pull-right">  
+                            <span class="click-star js-my-star">
+                              <i class="img icon-star"></i>
+                              收藏
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="contact-list-info clearfix">
+                      <div class="my-star">
+                        <div class="info-title">
+                          <h4>
+                            迈出化解地方政府债务风险的第一步
+                            <i class="img icon-speaker"></i>
+                          </h4>
+                        </div>
+                        <div class="info-ctr clearfix">
+                          <div class="pull-left">
+                            <span>
+                              <i class="img icon-clock"></i>
+                              <b>2017.03.28</b>
+                            </span>
+                            <span>
+                              <i class="img icon-page"></i>
+                              <b>10页</b>
+                            </span>
+                            <span>
+                                <i class="img icon-article"></i>
+                                <b>媒体文章</b>
+                                <b>毛军华</b>
+                            </span>
+                          </div>
+                          <div class="pull-right">  
+                            <span class="click-star js-my-star">
+                              <i class="img icon-star"></i>
+                              收藏
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="load-more">
+                    <i></i>
+                    <span>上拉加载更多</span>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="fxs">
+                  <div class="clearfix">
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>股票代码</th>
+                          <th>股票名称</th>
+                          <th>前一交易日收盘价</th>
+                          <th>市值</th>
+                          <th>30天内均成交股数</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>ZS000001</td>
+                          <td>平安银行</td>
+                          <td>23</td>
+                          <td>374623</td>
+                          <td>374623</td>
+                          <td><span class="btn btn-default cus-default gz"><i>+</i> 关注</span></td>
+                        </tr>
+                        <tr>
+                          <td>ZS000001</td>
+                          <td>平安银行</td>
+                          <td>23</td>
+                          <td>374623</td>
+                          <td>374623</td>
+                          <td><span class="btn btn-default cus-default gz active">已关注</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <br>
+          </div>
+          <!--右侧-->
+          <div class="col-xs-3">
+            <div class="clearfix">  
+              <div class="c-panel-title">
+                <h4>
+                  <i class="icon-title-left"></i>
+                  相关分析师
+                </h4>
+              </div>
+              <div class="visit-card-list">
+                <div class="card-panel">
+                  <div class="card-top clearfix pb0">
+                    <div class="card-img pull-left">
+                      <img src="../img/default.jpg" alt="">
+                    </div>
+                    <div class="pull-left card-user">
+                      <h4><a href="javascript:void(0)">赵立恒</a></h4>
+                      <span class="btn btn-default gz cus-default"><i>+</i>关注</span>
+                    </div>
+                  </div>
+                  <!--<div class="card-bottom">
+                    <p>
+                      关注分析师关注分析师
+                      关注分析师关注分析师
+                    </p>
+                  </div>-->
+                </div>
+                <div class="card-panel">
+                  <div class="card-top clearfix pb0">
+                    <div class="card-img pull-left">
+                      <img src="../img/default.jpg" alt="">
+                    </div>
+                    <div class="pull-left card-user">
+                      <h4><a href="javascript:void(0)">赵立恒</a></h4>
+                      <span class="btn btn-default gz cus-default active">已关注</span>
+                    </div>
+                  </div>
+                  <div class="card-bottom">
+                    <!--<p>
+                      关注分析师关注分析师
+                      关注分析师关注分析师
+                    </p>-->
+                  </div>
+                </div>
+                <div class="card-panel">
+                  <div class="card-top clearfix pb0">
+                    <div class="card-img pull-left">
+                      <img src="../img/default.jpg" alt="">
+                    </div>
+                    <div class="pull-left card-user">
+                      <h4><a href="javascript:void(0)">赵立恒</a></h4>
+                      <span class="btn btn-default gz cus-default"><i>+</i>关注</span>
+                    </div>
+                  </div>
+                  <div class="card-bottom">
+                   <!-- <p>
+                      关注分析师关注分析师
+                      关注分析师关注分析师
+                    </p>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer clearfix">
+        <div class="footer-content cleafix">
+          <div class="info-us pull-left">
+            <div class="contact-us pull-left">
+              <div class="list-item">
+                <dl>
+                  <dt>联系我们</dt>
+                  <dd><a href="javascript:void(0)">电话：010-5091273</a></dd>
+                  <dd><a href="javascript:void(0)">邮箱：info@cicc.com.cn</a></dd>
+                </dl>
+              </div>
+            </div>
+            <div class="about-us pull-left">
+              <div class="list-item">
+                <dl>
+                  <dt>关于我们</dt>
+                  <dd><a href="javascript:void(0)">联系我们</a></dd>
+                  <dd><a href="javascript:void(0)">帮助中心</a></dd>
+                  <dd><a href="javascript:void(0)">用户协议</a></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+
+          <div class="qrcode pull-right">
+            <div class="qrcode-box pull-left">
+              <img src="../img/qrcode.png" alt="">
+              <p>手机客户端</p>
+            </div>
+
+            <div class="qrcode-box pull-left gov-qrcode">
+              <img src="../img/qrcode.png" alt="">
+              <p>关注官方微信</p>
+            </div>
+          </div>
+        </div>
+        <div class="author">
+          ©2013-2014 China International Capital Corporation Limited, 京CP备07500352号-2
+        </div>
+    </div>
+
+    <!-- 留言 -->
+    <div class="modal fade" id="m1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <h4>给分析师（梁建）留言</h4>
+              <form action=""></form>
+              <textarea name="" id="" cols="30" rows="10" class="no-resize form-control"></textarea>
+              <br>
+              <div class="clearfix">
+                  <div class="pull-left compliance-clause" data-role="list-box">
+                      <a href="javascript:void(0)" data-role="list-ctr">合规服务条款</a>
+                      <div class="compliance-clause-content" data-role="list" style="display: block;">
+                        <p>
+                          本报告由中国国际金融股份有限公司（已具备中国证监
+                          会批复的证券投资咨询业务资格）制作。本报告中的信
+                          息均来源于我们认为可靠的已公开资料，但中国国际金
+                          融股份有限公司及其关联机构（以下统称“中金公司”）
+                          对这些信息的准确性及完整性不作任何保证。本报告中
+                          的信息、意见等均仅供投资者参考之用，不构成所述证
+                          券买卖的出价或征价。该等信息、意见并未考虑到获取
+                          本报告人员的具体投资目的、财务状况以及特定需求，
+                          在任何时候均不构成对任何人的个人推荐。投资者应当
+                          对本报告中的信息和意见进行独立评估，并应同时考量
+                          各自的投资目的、财务状况和特定需求，必要时就法律、
+                          商业、财务、税收等方面咨询专业财务顾问的意见。对
+                          依据或者使用本报告所造成的一切后果，中金公司及/
+                          或其关联人员均不承担任何法律责任。本报告由受金融
+                          市场行为监管局监管的中国国际金融（英国）有限公司
+                          （“中金英国”）于英国提供。本报告有关的投资和服务
+                          仅向符合《2000年金融服务和市场法2005年（金融推介）
+                          令》第19（5）条、38条、47条以及49条规定的人士提供。
+                          本报告并未打算提供给零售客户使用。在其他欧洲经济
+                          区国家，本报告向被其本国认定为专业投资者（或相当
+                          性质）的人士提供。 本报告将依据其他国家或地区的法
+                          律法规和监管要求于该国家或地区提供本报告。
+                          </p>
+                      </div>
+                    </div>
+                <span class="btn btn-primary cus-primary pull-right">提交</span>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 免责申明 -->
+    <div class="modal fade" id="disclaimer-tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <h4 class="text-dark-red text-center">免责申明</h4>
+              <div class="clearfix">
+                <div class="disclaimer-content">
+                  本报告由中国国际金融股份有限公司（已具备中国证监
+                  会批复的证券投资咨询业务资格）制作。本报告中的信
+                  息均来源于我们认为可靠的已公开资料，但中国国际金
+                  融股份有限公司及其关联机构（以下统称“中金公司”）
+                  对这些信息的准确性及完整性不作任何保证。本报告中
+                  的信息、意见等均仅供投资者参考之用，不构成所述证
+                  券买卖的出价或征价。该等信息、意见并未考虑到获取
+                  本报告人员的具体投资目的、财务状况以及特定需求，
+                  在任何时候均不构成对任何人的个人推荐。投资者应当
+                  对本报告中的信息和意见进行独立评估，并应同时考量
+                  各自的投资目的、财务状况和特定需求，必要时就法律、
+                  商业、财务、税收等方面咨询专业财务顾问的意见。对
+                  依据或者使用本报告所造成的一切后果，中金公司及/
+                  或其关联人员均不承担任何法律责任。本报告由受金融
+                  市场行为监管局监管的中国国际金融（英国）有限公司
+                  （“中金英国”）于英国提供。本报告有关的投资和服务
+                  仅向符合《2000年金融服务和市场法2005年（金融推介）
+                  令》第19（5）条、38条、47条以及49条规定的人士提供。
+                  本报告并未打算提供给零售客户使用。在其他欧洲经济
+                  区国家，本报告向被其本国认定为专业投资者（或相当
+                  性质）的人士提供。 本报告将依据其他国家或地区的法
+                  律法规和监管要求于该国家或地区提供本报告。
+                  本报告由中国国际金融股份有限公司（已具备中国证监
+                  会批复的证券投资咨询业务资格）制作。本报告中的信
+                  息均来源于我们认为可靠的已公开资料，但中国国际金
+                  融股份有限公司及其关联机构（以下统称“中金公司”）
+                  对这些信息的准确性及完整性不作任何保证。本报告中
+                  的信息、意见等均仅供投资者参考之用，不构成所述证
+                  券买卖的出价或征价。该等信息、意见并未考虑到获取
+                  本报告人员的具体投资目的、财务状况以及特定需求，
+                  在任何时候均不构成对任何人的个人推荐。投资者应当
+                  对本报告中的信息和意见进行独立评估，并应同时考量
+                  各自的投资目的、财务状况和特定需求，必要时就法律、
+                  商业、财务、税收等方面咨询专业财务顾问的意见。对
+                  依据或者使用本报告所造成的一切后果，中金公司及/
+                  或其关联人员均不承担任何法律责任。本报告由受金融
+                  市场行为监管局监管的中国国际金融（英国）有限公司
+                  （“中金英国”）于英国提供。本报告有关的投资和服务
+                  仅向符合《2000年金融服务和市场法2005年（金融推介）
+                  令》第19（5）条、38条、47条以及49条规定的人士提供。
+                  本报告并未打算提供给零售客户使用。在其他欧洲经济
+                  区国家，本报告向被其本国认定为专业投资者（或相当
+                  性质）的人士提供。 本报告将依据其他国家或地区的法
+                  律法规和监管要求于该国家或地区提供本报告。
+                  本报告并未打算提供给零售客户使用。在其他欧洲经济
+                  区国家，本报告向被其本国认定为专业投资者（或相当
+                  性质）的人士提供。 本报告将依据其他国家或地区的法
+                  律法规和监管要求于该国家或地区提供本报告。
+                  本报告由中国国际金融股份有限公司（已具备中国证监
+                  会批复的证券投资咨询业务资格）制作。本报告中的信
+                  息均来源于我们认为可靠的已公开资料，但中国国际金
+                  融股份有限公司及其关联机构（以下统称“中金公司”）
+                  对这些信息的准确性及完整性不作任何保证。本报告中
+                  的信息、意见等均仅供投资者参考之用，不构成所述证
+                  券买卖的出价或征价。该等信息、意见并未考虑到获取
+                  本报告人员的具体投资目的、财务状况以及特定需求，
+                  在任何时候均不构成对任何人的个人推荐。投资者应当
+                  对本报告中的信息和意见进行独立评估，并应同时考量
+                  各自的投资目的、财务状况和特定需求，必要时就法律、
+                  商业、财务、税收等方面咨询专业财务顾问的意见。对
+                  依据或者使用本报告所造成的一切后果，中金公司及/
+                  或其关联人员均不承担任何法律责任。本报告由受金融
+                  市场行为监管局监管的中国国际金融（英国）有限公司
+                  （“中金英国”）于英国提供。本报告有关的投资和服务
+                  仅向符合《2000年金融服务和市场法2005年（金融推介）
+                  令》第19（5）条、38条、47条以及49条规定的人士提供。
+                  本报告并未打算提供给零售客户使用。在其他欧洲经济
+                  区国家，本报告向被其本国认定为专业投资者（或相当
+                  性质）的人士提供。 本报告将依据其他国家或地区的法
+                  律法规和监管要求于该国家或地区提供本报告。
+                </div> 
+                <br>
+                <div class="clearfix">
+                  <label class="fn">
+                    <input type="checkbox"> 下次不再提示
+                  </label>
+                  <br>
+                  <p class="text-center"><span class="btn btn-primary cus-primary" id="confirm-claimer">我已阅读，并同意</span></p>
+                </div>
+                
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 注册/登录 -->
+    <div class="modal fade" id="regist-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <h4>注册或者登录</h4>
+              <div class="clearfix">
+                  <div class="login-content pull-left">
+                      <ul id="myTab" class="nav nav-tabs cus-tab">
+                        <li class="active">
+                          <a href="#normal" data-toggle="tab">
+                            登录
+                            <i class="icon-underline"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#login-phone" data-toggle="tab">
+                             注册
+                            <i class="icon-underline"></i>
+                          </a>
+                      </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="normal">
+                            <form class="bs-example bs-example-form" data-example-id="input-group-sizing">
+                              <div class="form-group icon-add">
+                                <i class="img icon-big-user"></i>
+                                <input type="text" class="form-control" placeholder="用户名" id="username">
+                              </div>
+                              <br>
+                              <div class="form-group icon-add">
+                                <i class="img icon-lock"></i>
+                                <input type="text" class="form-control" placeholder="密码" id="password">
+                              </div>
+                              <br>
+                              <div class="input-group login-btn">
+                                <span class="btn btn-primary cus-primary" id="login">登陆</span>
+                              </div>
+                              <br>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade in" id="login-phone">
+                            <form class="bs-example bs-example-form" data-example-id="input-group-sizing">
+                              <div class="form-group icon-add">
+                                <i class="img icon-big-user"></i>
+                                <input type="text" class="form-control" placeholder="用户名" id="user_name">
+                              </div>
+                              <div class="form-group icon-add">
+                                <i class="img icon-big-user"></i>
+                                <input type="text" class="form-control" placeholder="密码" id="pass_word">
+                              </div>
+                              <div class="form-group icon-add">
+                                <i class="img icon-big-user"></i>
+                                <input type="text" class="form-control" placeholder="昵称" id="nick_name">
+                              </div>
+                              
+                              <div class="input-group text-center register-box">
+                                <span class="btn btn-primary cus-primary" id="register">注册</a>
+                              </div>
+                            </form>
+                        </div>
+                      </div>
+                      
+                    </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 咨询 -->
+    <div class="modal fade" id="m2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document" style="width: 1140px;">
+        <div class="modal-content h-597">
+          <div class="modal-body" style="width: 1139px">
+            <div class="row">
+              <!-- 用户列表和最近联系人 -->
+              <div class="col-xs-2 w-220 b-left-1 cus-bg h-597 m-t-f-15 p-t-15 over-h">
+                <!-- 会话标题 -->
+                <div class="clearfix list-head">
+                  <i class="glyphicon glyphicon-menu-left pull-left js-back-to dis-none cursor-p">返回</i>
+                  <h4 class="pull-left js-IM-title">会话记录（一周之内）</h4>
+                </div>
+
+                <div class="IM-left-bar">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="IM-session-record">
+                        <div class="clearfix pad-r js-to-contact-list pl15 roster fz18 cursor-p">
+                          <i class="img icon-roster pull-left"></i> 客户列表
+                          <i class="pull-right glyphicon glyphicon-menu-right"></i>
+                        </div>
+                        <br>
+                        <div class="clearfix contact-user-list" id="contact-item">
+                          <ul>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-xs-6">
+                      <br>
+                      <div class="IM-user-list">
+                        <div class="clearfix pad-r">
+                            <div class="component-search pl15"> 
+                              <input type="text" class="form-control" placeholder="搜索好友">
+                              <i class="img icon-search"></i>
+                              <div class="search-data-list" style="display: none;">
+                                <ul>
+                                  <li>
+                                    <a href="javascript:void(0)">搜索结果1</a>
+                                  </li>
+                                  <li>
+                                    <a href="javascript:void(0)">搜索结果1</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="clearfix contact-user-list" id="cur-custom-list">
+                          <ul>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img class="media-object b-r-8" src="../img/default.jpg" alt="" width="50" height="50">
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading">李峰</h4>
+                                  <p>前天和你说的事情可以...</p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="msg-tips-switch">
+                  消息提醒
+                  <i class="img icon-check"></i>
+                </div>
+              </div>
+
+              <!-- 对话框 -->
+              <div class="col-xs-6 m-f-15 msg-ctr">
+                <div class="panel panel-default no-border-r ">
+                  <div class="panel-heading no-border-r bg-white">
+                    <h4>
+                      梁建
+                    </h4>
+                    <small>中国互联网专家</small>
+                  </div>
+                  <div class="panel-body h514 pr0">
+                    <div class="im-history clearfix">
+                        <div class="clearfix">
+
+                          <!--推送的消息-->
+                          <div class="clearfix text-center">
+                            <span class="alert-tip">当前客户正在阅读研报《基数推动CPI上行，PPI继续回落: 5月通胀数据点评》</span>
+                          </div>
+                          <div class="" style="display: block;">
+                            <!--我发送文本消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left"><i class="img icon-im-r"></i>
+                                  <span>你好</span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--对方发送文本消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right">
+                                  <i class="img icon-im-l"></i>
+                                  <span>你好哦</span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--我发送图片消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left"><i class="img icon-im-r"></i>
+                                  <span>
+                                  <div class="p5 pv10">
+                                    <img src="../img/default.jpg" alt="" width="180px" height="100px">
+                                  </div>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--好友发送图片消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right"><i class="img icon-im-l"></i>
+                                  <span>
+                                  <div class="p5 pv10">
+                                    <img src="../img/default.jpg" alt="" width="180px" height="100px">
+                                  </div>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--好友发送文件消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right">
+                                  <i class="img icon-im-l"></i>
+                                  <span>
+                                  <!--文件-->
+                                  <div class="clearfix p15">
+                                    <div class="row">
+                                      <div class="col-xs-8">
+                                        <h5 class="over-ell mb30">中金CICC研报分类.doc</h5>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <div class="contact-file">
+                                          <i class="img icon-im-file"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <!--end 文件-->
+
+                                    <!--删除文件按钮-->
+                                  <i class="img icon-im-cancel-file"></i>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--好友发送文件消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right">
+                                  <i class="img icon-im-l"></i>
+                                  <span>
+                                  <!--文件-->
+                                  <div class="clearfix p15">
+                                    <div class="row">
+                                      <div class="col-xs-8">
+                                        <h5 class="over-ell mb30">中金CICC研报分类.doc</h5>
+                                        <p class="text-gray cursor-p">点击下载</p>
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <div class="contact-file">
+                                          <i class="img icon-im-file"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <!--end 文件-->
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--好友发送文件消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right">
+                                  <i class="img icon-im-l"></i>
+                                  <span>
+                                  <!--文件-->
+                                  <div class="clearfix p15">
+                                    <div class="row">
+                                      <div class="col-xs-8">
+                                        <h5 class="over-ell mb30">中金CICC研报分类.doc</h5>
+                                        <p class="text-gray">12.2M/30.5M</p>
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <div class="contact-file">
+                                          <i class="img icon-im-file"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <!--end 文件-->
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--我发送文本消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left"><i class="img icon-im-r"></i>
+                                  <span>你好</span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--我发送的文件消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left">
+                                  <i class="img icon-im-r"></i>
+                                  <span>
+                                  <!--文件-->
+                                  <div class="clearfix p15">
+                                    <div class="row">
+                                      <div class="col-xs-8">
+                                        <h5 class="over-ell mb30">中金CICC研报分类.doc</h5>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-4">
+                                        <div class="contact-file">
+                                          <i class="img icon-im-file"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <!--end 文件-->
+
+                                    <!--删除文件按钮-->
+                                  <i class="img icon-im-cancel-file"></i>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--我发送的短视频-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left"><i class="img icon-im-r"></i>
+                                  <span>
+                                  <div class="p5 pv10">
+                                    <img src="../img/default.jpg" alt="" width="230" height="150">
+                                    <i class="img icon-im-stop"></i>
+                                  </div>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+
+                            <!--好友发送的短视频-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-left im-to">
+                                <div class="pull-right"><i class="img icon-im-l"></i>
+                                  <span>
+                                  <div class="p5 pv10">
+                                    <img src="../img/default.jpg" alt="" width="230" height="150">
+                                    <i class="img icon-im-stop"></i>
+                                  </div>
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+
+                            <!--我发送文本和表情消息-->
+                            <div class="clearfix">
+                              <div class="clearfix pull-right im-from">
+                                <div class="pull-left"><i class="img icon-im-r"></i>
+                                  <span>
+                                  <img src="../lib/im/images/faces/faces/ee_1.png" alt="">
+                                  你好
+                                </span>
+                                </div>
+                                <img src="../img/default.jpg" width="50px" height="50px">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div id="cicc-im">
+
+                          </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="im-msg-bar">
+                      <div class="row">
+                      <div class="clearfix col-xs-6">
+                        <span id="face-ctr">
+                          <i class="img icon-smail"></i>
+                          <div class="face-box"></div>
+                        </span>
+                        <span id="folder-ctr">
+                          <i class="img icon-folder"></i>
+                          <input type="file" style="display:none" id="fileInput">
+                        </span>
+                        <!--<span class="link-ctr">
+                          <i class="img icon-link"></i>
+                        </span>-->
+                      </div>
+                      <div class="col-xs-2 pull-right">
+                        <span class="btn btn-primary cus-primary update-j-l">提交服务记录</span>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="input-im-ctr">
+                      <textarea name="" id="input-msg" cols="89" rows="3" class="form-control no-resize"></textarea>
+                      <span class="btn btn-default cus-gray pull-right js-send-msg">发送(S)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 合规提示 -->
+              <div class="col-xs-2 w220 hg-tips">
+                <div class="pull-right z-100">
+                  <i data-dismiss="modal">&times;</i>
+                </div>
+                
+                <div class="clearfix hg-content">
+                  <h4 class="text-dark-red">合规提示</h4>
+                  <div>
+                    <p class="pr15">
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                      合规提示合规提示合规提示合规提示合规提示合规提示合规提示
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--<h4> 这里是对话框</h4>
+    <div id="cc">
+
+    </div>
+
+    <span id="dj">这里是iframe</span>-->
+    <!-- <iframe src="contact.html" frameborder="0" width="1120px" height="700px"></iframe> -->
+
+    <br>
+    <br>
+    <br>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../lib/jquery/jquery-1.11.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <!--jquery validtae-->
+    <script src="../jquery-validate/jquery.validate.min.js"></script>
+
+    <!--commonjs-->
+    <script src="../js/common.js"></script>
+    <script>
+      $(function(){
+          console.log('input===>',$('#fileInput').length)
+        var ctx = ''
+
+        /**
+         * @desc 渲染消息
+         */
+        var textData = {
+          text:'你好'
+        }
+
+        var fileData = {
+          fileName: '中金文档.doc',
+          fileUrl: ctx + '/upload/cicc.doc'
+        }
+
+        var imgData = {
+          imgUrl: '../img/default.jpg'
+        }
+
+        var vedioMsg = {
+          vedioUrl: '../js/罗大佑%20-%20童年.mp3'
+        }
+
+        // 文本消息(包括表情)
+        renderMsg.renderTextMsg('cicc-im', textData, true)
+        renderMsg.renderTextMsg('cicc-im', textData, false)
+
+        // 文件消息
+        renderMsg.renderFileMsg('cicc-im', fileData, true)
+        renderMsg.renderFileMsg('cicc-im', fileData, false)
+
+        // 图片消息
+        renderMsg.renderImgMsg('cicc-im', imgData, true)
+        renderMsg.renderImgMsg('cicc-im', imgData, false)
+
+        // 视频消息
+        /*renderMsg.renderVedioMsg('cicc-im', vedioMsg, true)
+        renderMsg.renderVedioMsg('cicc-im', vedioMsg, false)*/
+
+        var Utils = (function () {
+            WebIM.flashUpload = UploadShim({fileInputId: 'uploadShim'}).flashUpload;
+            var getObjectURL = function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) { // basic
+              url = window.createObjectURL(file)
+            } else if (window.URL != undefined) { // mozilla(firefox)
+              url = window.URL.createObjectURL(file)
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+              url = window.webkitURL.createObjectURL(file)
+            }
+            return url
+          }
+
+          var testFileType = function (file_data) {
+            var cur_type = file_data.type
+            var file_type = {
+              is_img: /image\//.test(cur_type),
+              is_vedio: /video\//.test(cur_type)
+            }
+            return file_type;
+          }
+
+          return {
+            getObjectURL: getObjectURL,
+            testFileType: testFileType
+          }
+
+        }())
+
+        // 发送文件消息[图片，视频，其他文件]
+        var sendFileMsg = (function() {
+            /**
+             * @desc 发送文件消息
+             * @param {Object} param = {to: to, isMe: is_me, fileId: 'fileInput', fileType: file_type}
+             * to 是发送对象的id
+             * fileId file input 的id
+             * isMe 发送消息的人是否是我自己
+             * */
+            var _send = function (param) {
+                var id = conn.getUniqueId();                       // 生成本地消息id
+                var msg = new WebIM.message('file', id);           // 创建文件消息
+                var input = document.getElementById(param.fileId); // 选择文件的input
+                var file = WebIM.utils.getFileUrl(input);          // 将文件转化为二进制文件
+                var uploadFiledata = null
+                var url = null
+                var allowType = {
+                    'jpg': true,
+                    'gif': true,
+                    'png': true,
+                    'bmp': true,
+                    'zip': true,
+                    'txt': true,
+                    'doc': true,
+                    'pdf': true,
+                    'mp3': true,
+                    'amr': true,
+                    'wmv': true,
+                    'mp4': true
+                };
+                file.fileSize = param.fileData.size
+
+                if (file.filetype.toLowerCase() in allowType) {
+                    var option = {
+                        apiUrl: WebIM.config.apiURL,
+                        file: file,
+                        to: param.to, // 接收消息对象
+                        roomType: false,
+                        chatType: 'singleChat',
+                        onFileUploadError: function () { // 消息上传失败
+                            console.log('消息上传失败'+'onFileUploadError');
+                            console.log('arguments==>',arguments)
+                            renderMsg.renderErrorMsg(param.to, true)
+                            // 回到底部
+                            WEBIM.scrollBottom(param.to)
+                        },
+                        onFileUploadComplete: function (data) { // 消息上传成功
+                            console.log('消息上传成功','onFileUploadComplete');
+                            url = ((location.protocol != 'https:' && WebIM.config.isHttpDNS) ? (Demo.conn.apiUrl + data.uri.substr(data.uri.indexOf("/", 9))) : data.uri) + '/' + data.entities[0].uuid;
+                            uploadFiledata = data
+                        },
+                        success: function () { // 消息发送成功
+                            console.log('消息发送成功','Success');
+                            var msgData = {
+                                fileName: param.fileData.name,
+                                fileSize: param.fileData.size,
+                                fileUrl: url
+                            }
+                            if (param.fileType.is_img) { // 发送图片
+                                renderMsg.renderImgMsg(param.to, msgData, param.isMe)
+                            } else if (param.fileType.is_vedio) { // 发送视频
+                                renderMsg.renderVedioMsg(param.to, msgData, param.isMe)
+                            } else { // 发送普通文件
+                                renderMsg.renderFileMsg(param.to, msgData, param.isMe)
+                            }
+                            // 回到底部
+                            WEBIM.scrollBottom(param.to)
+                        },
+                        flashUpload: WebIM.flashUpload
+                    };
+                    msg.set(option);
+                    conn.send(msg.body);
+                } else {
+                    renderFileTypeTips(param.to, '不支持此类型:', file.filetype.toLowerCase())
+                }
+            }
+
+            return {send: _send}
+        }())
+
+        $('#contact').on('click', function() {
+          $('#regist-login').show()
+        })
+
+        $('#folder-ctr input').change(function(){
+            var to = $('.IM-session-record ul li.active').attr('data-id')
+            var fileData = this.files[0]
+            var file_type = Utils.testFileType(fileData)
+            var is_me = true
+            var param = {to: to, isMe: is_me, fileId: 'fileInput', fileType: file_type, fileData: fileData}
+            sendFileMsg.send(param)
+        })
+
+        //开关按钮
+        $('i.icon-check').on('click', function(){
+          var is_active = $(this).hasClass('active')
+          if(is_active){
+            $(this).removeClass('active')
+            $('.update-j-l').hide()
+          } else {
+            $(this).addClass('active')
+            $('.update-j-l').show()
+          }
+        })
+
+        // 客户列表切换
+        $('.js-to-contact-list').on('click', function(){
+          $('.js-back-to').show()
+          $(this).parents('.IM-left-bar').css({'left':'-235px'})
+          $('.js-IM-title').text('客户列表')
+        })
+
+        //js-back-to
+        $('.js-back-to').on('click', function(){
+          $('.IM-left-bar').css({'left': '0'})
+          $('.js-IM-title').text('会话记录（一周之内）')
+          $(this).hide()
+        })
+
+      })
+    </script>
+
+    
+    <!-- 环信 -->
+    <script src="../js/contact.js"></script>
+
+    <!-- 滚动条 -->
+    <script src="../lib/jquery-scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script>
+      $(function(){
+        //$('.im-history > div').mCustomScrollbar()
+        $(window).on("load",function(){
+          $(".hg-tips .hg-content > div, .disclaimer-content,#contact-item, #cur-custom-list").mCustomScrollbar()
+        })
+
+      })
+
+    </script>
+  </body>
+</html>

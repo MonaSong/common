@@ -1,0 +1,50 @@
+
+/* 默认风格提示框 */
+.modal.cicc-modal .modal-header{
+	background-color:#CA4E4E;
+	color: #fff;
+}
+
+.modal.cicc-modal .modal-content{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border-width: 0;
+}
+
+.modal.cicc-modal .modal-header .close{
+	filter: alpha(opacity=1);
+  opacity: 1;
+  color: #fff;
+  font-weight: normal;
+  font-size: 25px;
+}
+/*.modal.cicc-modal .modal-body{*/
+	/*text-align:center;*/
+/*} */
+.modal.cicc-modal .modal-footer .btn-primary{
+	color: #CF484F;
+    background-color: #fff;
+    border-color: #CF484F;
+    margin: 0 auto;
+}
+.modal.cicc-modal .modal-footer .btn-primary:hover{
+	color: #fff;
+    background-color: #CF484F;
+    border-color: #CF484F;
+}
+
+.modal.cicc-modal .modal-footer .btn+.btn {
+  margin-bottom: 0;
+  margin-left: 30px;
+}
+
+.modal.alert {
+
+}
+
+
+.modal.disclaimer-tip .modal-header{
+  display: none;
+}
+
