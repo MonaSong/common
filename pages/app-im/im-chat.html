@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>咨询</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../../libs/icon-font/iconfont.css"/>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="resource/css/im-chat.css">
+</head>
+
+<body>
+
+    <header id="header" class="mui-bar mui-bar-nav has-statusbar">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back-to-notice"></a>
+        <h1 class="mui-title" id="chatName"></h1>
+    </header>
+    <pre id='h'></pre>
+    <div id="im-chat-box" class="mui-content pt70">
+        <div class="voice-tip" v-if="showVoiceTip" v-text="voiceTipContent"></div>
+        <div class="" id="contact-ct">
+            <li id="tapAudio">
+                <audio   controls="controls">
+                    <source src="https://a1.easemob.com/1132170906115603/cicc-web/chatfiles/aaee8c70-cea7-11e7-8de8-13291c53fd13" type="audio/m3u8">
+                </audio>
+             
+            </li>
+            <div id="audio_tips"></div>
+            <ul class="mui-clearfix" v-if="msgList">
+                <li v-for="item in msgList">
+                    <div class="chat-list flex-container-mid main-chat" v-if="item.isMe">
+                        <!--文字消息-->
+                        <div class="chat-cont chat-cont-right" v-html="item.msg" v-if="item.type==0"></div>
+                        
+                        <!--图片消息-->
+                        <div class="chat-cont chat-cont-right"  v-if="item.type==1">
+                            <img :src="item.fileUrl" alt="" style="width: 200px; height: auto;">
+                        </div>
+                        
+                        <!--语音消息-->
+                        <div class="chat-cont chat-cont-right"  v-if="item.type==2">
+                            <audio  alt="" controls="controls" style="width: 150px;">
+                                <source :src="item.fileUrl" type="audio/mp3" >
+                            </audio>
+                        </div>
+    
+                        <!--视频消息-->
+                        <div class="chat-cont chat-cont-right my-audio"  v-if="item.type==3">
+                            <vedio :src="item.fileUrl" alt=""></vedio>
+                        </div>
+    
+                        <div class="head-icon">
+                            <img src="../../images/main/txl.png" alt=""/>
+                        </div>
+                    </div> 
+                    <div class="chat-list flex-container-mid" v-else>
+                        <div class="head-icon">
+                            <img src="../../images/main/txl.png" alt=""/>
+                        </div>
+                        <!--文本消息-->
+                        <div class="chat-cont chat-cont-left" v-html="item.msg" v-if="item.type==0"></div>
+                        
+                        <!--图片消息-->
+                        <div class="chat-cont chat-cont-left"  v-if="item.type==1">
+                            <img :src="item.fileUrl" alt="" style="width: 200px; height: auto;">
+                        </div>
+                        
+                        <!--语音消息-->
+                        <div class="chat-cont chat-cont-left my-audio"  v-if="item.type==2">
+                            <audio  alt="" controls="controls" style="width: 150px;">
+                                <source :src="item.fileUrl" type="audio/mp3">
+                            </audio>
+                        </div>
+                        
+                        <!--视频消息-->
+                        <div class="chat-cont chat-cont-left"  v-if="item.type==3">
+                            <video :src="item.fileUrl" alt=""></video>
+                        </div>
+
+                    </div>
+                </li>
+            </ul> 
+            
+            
+        </div>
+    
+        <footer class="operation-area">
+            <div class="mui-clearfix">
+                <i class="mui-icon  mui-pull-left im-voice"
+                   :class="{'icon-im-audio': showInput, 'icon-im-keyboad': !showInput }"
+                   id="voice-control"
+                   data-status="input"></i>
+                <div class="mui-pull-left send-text-voice">
+                    <form action="javascript:void(0)">
+                        <input type="text" name="" id="input-msg" value="" v-show="showInput" autofocus="autofocus"/>
+                    </form>
+                    <span v-show="!showInput" class="app-voice" style="display:none" id="app-voice">按住 说话</span>
+                </div>
+                <span class="mui-pull-right pr0 send-file-smil">
+                <i class="mui-icon"
+                   :class="{'icon-im-smil': !showSmil, 'icon-im-keyboad': showSmil}"
+                   data-status="smil"
+                   id="smil-control"></i>
+                <i class="mui-icon icon-im-file" data-status="file" id="file-control" v-show="!showSend"></i>
+                <i class="mui-icon send-text"  id="send-text" v-show="showSend" style="display: none">发送</i>
+              </span>
+            </div>
+            <div class="operate-info mui-clearfix" id="operate-info" v-show="showSmil || showFile" style="display: none">
+                <div class="file-box mui-clearfix" id="file-box" v-show="showFile">
+                    <ul class="mui-clearfix">
+                        <li id="im-pic"><i class="mui-icon icon-img"></i></li>
+                        <li id="im-take-pic"><i class="mui-icon icon-im-take-photo"></i></li>
+                        <li id="im-video"><i class="mui-icon icon-im-take-vedio"></i></li>
+                        <!--<li id="" class="im-pic"> 
+                            <label for="sendImgInput">
+                            <i class="mui-icon icon-img"></i>
+                            &lt;!&ndash;文件发送input&ndash;&gt;
+                            <input type="file" id="sendImgInput" accept="image/gif,image/png,image/jpeg,image/jpg"/>
+                            </label>
+                        </li>-->
+                    </ul> 
+                </div>  
+    
+                <div class="smil-box mui-clearfix" id="smil-box" v-show="showSmil"></div>
+            </div>
+        </footer>  
+        
+        <div class="im-modal" v-show="showBig">
+            <div class="im-backdrop"></div>
+            <div class="modal-body" id="im-modal-body">
+                <div style="text-align: center; margin-top: 80px;">
+                    <img :src="bigSrc" alt="" v-if="bigType=='img'" style="max-width: 90%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../../js/mui.min.js "></script> 
+<script src="../../js/app.js"></script>
+<script src="../../js/utils.js"></script>
+<script type="text/javascript" src="../../js/vue.min.js"></script>
+<script type="text/javascript" src="../../js/base64.js"></script>
+<!-- im -->
+<script type="text/javascript" src="resource/im/im-config/webim.config.js"></script>
+<script type="text/javascript" src="resource/im/im-js/strophe-1.2.8.min.js"></script>
+<script type="text/javascript" src="resource/im/im-js/websdk-1.4.12.js"></script>
+<!-- end im -->
+
+<script type="text/javascript" src="resource/js/im-request.js"></script>
+<script type="text/javascript " src="resource/js/im-chat.js"></script>
+
+</html>
