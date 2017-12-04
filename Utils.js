@@ -131,5 +131,18 @@ var Utils = {
       url = window.webkitURL.createObjectURL(file)
     }
     return url
+  },
+  //
+  GetLength: function(s) {
+      var len = 0
+      for(var i=0; i<s.length; i++) {
+          var c = s.substr(i,1)
+          var ts = escape(c);  
+          if(ts.substring(0,2) == "%u"){
+              len += 2
+          } else {
+              len += 1
+          }
+      }
+      return len
   }
-}
