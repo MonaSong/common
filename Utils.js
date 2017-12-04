@@ -133,7 +133,7 @@ var Utils = {
     return url
   },
   //
-  GetLength: function(s) {
+  getStrLength: function(s) {
       var len = 0
       for(var i=0; i<s.length; i++) {
           var c = s.substr(i,1)
